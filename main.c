@@ -10,33 +10,39 @@ void compterColonnes(const char *chemin, int *max, int *min);
 
 int main(void) {
 	
-        char *chemin={"EEESSSSWWNNNNNN"};
+        char *chemin={"EEESSSWWNNNNNN"};
 	
         int i, j;
         int count=0;
-        int max=0;
-        int min=0;
+        int maxLignes=0;
+        int minLignes=0;
+        
+        int maxCol=0;
+        int minCol=0;
         for(i=0; i < (strlen(chemin)); i++){
             count++;
         }
-        compterLignes(chemin, &max, &min);
-        printf("Le minimum Lignes = %d\n", min);
-        int *minLignes= &min;
-        int *maxLignes= &max;
-        printf("Le minimum Lignes = %d\n", *minLignes);
-        printf("Le max Lignes = %d\n", *maxLignes);
-        compterColonnes(chemin, &max, &min);
-        printf("Le minimum colonnes= %d\n", min);
-        int *minCol= &min; // ajouter
-        int *maxCol= &max;
-        printf("Le minimum col = %d\n", *minCol);
-        printf("Le max col = %d\n", *maxCol);
-        int rows= max + 1;
-        int cols= max + 1;
-        int debutChemin= *maxLignes - *minCol;
+        compterLignes(chemin, &maxLignes, &minLignes);
+        printf("Le minimum Lignes = %d\n", minLignes);
+        //int *minLignes= &min;
+        //int *maxLignes= &max;
+        printf("Le minimum Lignes = %d\n", minLignes);
+        printf("Le max Lignes = %d\n", maxLignes);
+        
+        compterColonnes(chemin, &maxCol, &minCol);
+        printf("Le minimum colonnes= %d\n", minCol);
+        //int *minCol= &min;
+        //int *maxCol= &max;
+        printf("Le minimum col = %d\n", minCol);
+        printf("Le max col = %d\n", maxCol);
+        int rows= maxLignes + 1;
+        int cols= maxCol + 1;
+        printf("Rows = %d\n", rows);
+        printf("Cols = %d\n", cols);
+        int debutChemin= (maxLignes - minCol);
         printf("Le debut du chemin= %d\n", debutChemin);
         
-        printf("Le minimum = %d", min);
+        //printf("Le minimum = %d", min);
         char tab[rows][cols];
         memset(tab, ' ', sizeof(tab));//fill under bar
         printf("taille chemin %d\n", count);
