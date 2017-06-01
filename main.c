@@ -27,7 +27,7 @@ int main(void) {
         printf("Le max Lignes = %d\n", *maxLignes);
         compterColonnes(chemin, &max, &min);
         printf("Le minimum colonnes= %d\n", min);
-        int *minCol= &min;
+        int *minCol= &min; // ajouter
         int *maxCol= &max;
         printf("Le minimum col = %d\n", *minCol);
         printf("Le max col = %d\n", *maxCol);
