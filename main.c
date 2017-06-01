@@ -10,7 +10,7 @@ void compterColonnes(const char *chemin, int *max, int *min);
 
 int main(void) {
 	
-        char *chemin={"EEESSSWWNNNNNN"};
+        char *chemin={"EEEENNNNW"};
 	
         int i, j;
         int count=0;
@@ -30,7 +30,7 @@ int main(void) {
         printf("Le max Lignes = %d\n", maxLignes);
         
         compterColonnes(chemin, &maxCol, &minCol);
-        printf("Le minimum colonnes= %d\n", minCol);
+        //printf("Le minimum colonnes= %d\n", minCol);
         //int *minCol= &min;
         //int *maxCol= &max;
         printf("Le minimum col = %d\n", minCol);
@@ -39,7 +39,7 @@ int main(void) {
         int cols= maxCol + 1;
         printf("Rows = %d\n", rows);
         printf("Cols = %d\n", cols);
-        int debutChemin= (maxLignes - minCol);
+        int debutChemin= (maxLignes - maxCol);
         printf("Le debut du chemin= %d\n", debutChemin);
         
         //printf("Le minimum = %d", min);
