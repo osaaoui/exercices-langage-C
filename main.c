@@ -6,11 +6,24 @@ void printTab(int rows, int cols, char tab[rows][cols]);
 void insertCharacter(int rows, int cols, int x, int y, char letter, char tab[rows][cols]);
 void compterLignes(const char *chemin, int *max, int *min);
 void compterColonnes(const char *chemin, int *max, int *min);
-//void afficherChemin(const char *chemin, int debut);
+
 int debutChemin(int *maxLignes, int *maxCol);
+
+
+
+struct Rectangle {
+    int xmin;
+    int xmax;
+    int ymin;
+    int ymax;
+
+};
+
+void initialiserRectangle(struct Rectangle *rect, int *lignes, int *colonnes);
+
 int main(void) {
 	
-        char *chemin={"EEENNSSWW"};
+        char *chemin={"ENSS"};
 	
         int i, j;
         int count=0;
@@ -35,10 +48,10 @@ int main(void) {
         //int *maxCol= &max;
         printf("Le minimum col = %d\n", minCol);
         printf("Le max col = %d\n", maxCol);
-        int rows= maxLignes + 1;
-        int cols= maxCol + 1;
-        printf("Rows = %d\n", rows);
-        printf("Cols = %d\n", cols);
+        int lignes= maxLignes + 1;
+        int colonnes= maxCol + 1;
+        printf("Rows = %d\n", lignes);
+        printf("Cols = %d\n", colonnes);
         
         int debut = debutChemin(&maxLignes, &maxCol);
         printf("Le debut du chemin= %d\n", debut);
@@ -46,24 +59,49 @@ int main(void) {
         //printf("Le debut du chemin= %d\n", debutChemin);
         
         //printf("Le minimum = %d", min);
-        char tab[rows][cols];
+        char tab[lignes][colonnes];
         memset(tab, ' ', sizeof(tab));//fill under bar
         printf("taille chemin %d\n", count);
         //compterLignes(chemin, &max, &min);
         //compterColonnes(chemin, &max, &min);
+        struct Rectangle rect;
+        initialiserRectangle(&rect, &lignes, &colonnes);
+        
+        printf("Xmin = %d\n", rect.xmin);
+        printf("Xmax = %d\n", rect.xmax);
+        printf("Ymin = %d\n", rect.ymin);
+        printf("Ymax = %d\n", rect.ymax);
+        
+        
+        
+        
         int abs= 0;
         int ordonnee= 0;
         for(i=0;i< count + 1;i++){
             
             
             
-	insertCharacter(rows, cols, abs, ordonnee, 'x', tab);
+	insertCharacter(lignes, colonnes, abs, ordonnee, 'x', tab);
         ++ordonnee;
         
         }
-	printTab(rows, cols, tab);
+	printTab(lignes, colonnes, tab);
 	return 0;
 }
+
+void initialiserRectangle(struct Rectangle *rect, int *lignes, int *colonnes){
+    
+    //struct Rectangle rect;
+    rect->xmin=0;
+    rect->xmax= *lignes - 1; 
+    
+    rect->ymin=0;
+    rect->ymax=*colonnes - 1; 
+            
+        
+    }
+    
+
 
 int debutChemin(int *maxLignes, int *maxCol){
     int debut=0;
