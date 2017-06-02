@@ -6,11 +6,12 @@ void printTab(int rows, int cols, char tab[rows][cols]);
 void insertCharacter(int rows, int cols, int x, int y, char letter, char tab[rows][cols]);
 void compterLignes(const char *chemin, int *max, int *min);
 void compterColonnes(const char *chemin, int *max, int *min);
-
+int compterLettres(const char *chemin, char lettre);
+int debutChemin(int *maxLignes, int *maxCol);
 
 int main(void) {
 	
-        char *chemin={"EEEENNNNW"};
+        char *chemin={"EEESSSSWWNNNNNN"};
 	
         int i, j;
         int count=0;
@@ -39,12 +40,14 @@ int main(void) {
         int cols= maxCol + 1;
         printf("Rows = %d\n", rows);
         printf("Cols = %d\n", cols);
-        int debutChemin= (maxLignes - maxCol);
-        printf("Le debut du chemin= %d\n", debutChemin);
+        
+        // Determiner le debut du chemin
+        int debut = debutChemin(&maxLignes, &maxCol);
+        printf("Le debut du chemin= %d\n", debut);
         
         //printf("Le minimum = %d", min);
         char tab[rows][cols];
-        memset(tab, ' ', sizeof(tab));//fill under bar
+        memset(tab, '_', sizeof(tab));//fill under bar
         printf("taille chemin %d\n", count);
         //compterLignes(chemin, &max, &min);
         //compterColonnes(chemin, &max, &min);
@@ -58,16 +61,33 @@ int main(void) {
         ++ordonnee;
         
         }
-        //insertCharacter(rows, cols, 1, 0, 'x', tab);
-        //insertCharacter(rows, cols, 0, 0, 'x', tab);
-        //insertCharacter(rows, cols, 0, 2, 'x', tab);
-        //insertCharacter(10, 15, 1, 0, 'x', tab);
-        //insertCharacter(10, 15, 0, 0, 'x', tab);
-        //insertCharacter(10, 15, 0, 1, 'x', tab);
-        //insertCharacter(10, 15, 0, 2, 'x', tab);
+        
 	printTab(rows, cols, tab);
 	return 0;
 }
+int debutChemin(int *maxLignes, int *maxCol){
+    int debut=0;
+    if (*maxLignes==0 || *maxCol ==0){
+        debut =0;
+    }else{
+        debut= *maxLignes - *maxCol; 
+    }
+    return debut;
+}
+
+int compterLettres(const char *chemin, char lettre){
+    int i;
+    int compte=0;
+    for(i=0;i < (strlen(chemin));i++){
+        if(chemin[i]==lettre){
+            compte++;
+        }
+    }
+    return compte;
+}
+
+
+
 void compterLignes(const char *chemin, int *max, int *min){
     int compteurNord=0;
     int compteurSud=0;
@@ -96,7 +116,7 @@ void compterLignes(const char *chemin, int *max, int *min){
         *min= compteurNord;
         printf("S est MaX. Nombre de lignes = %d\n", compteurSud + 1);
     }else if(compteurNord ==0 && compteurSud==0){
-        *max=1;
+        *max=0;
         printf("N==0 et S==0. donc max = %d\n", max);
     }else if(compteurNord== compteurSud){
         *max= compteurNord + 1;
@@ -138,7 +158,7 @@ void compterColonnes(const char *chemin, int *max, int *min){
         *min= compteurEst;
         printf("W est Max. Nombre de colonnes = %d\n", compteurWest + 1);
     }else if(compteurEst==0 && compteurWest==0){
-        *max=1;
+        *max=0;
         printf("E et W=0, donc max = %d\n", max);
     } else if(compteurEst== compteurWest){
         *max= compteurEst +1;
