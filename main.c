@@ -23,7 +23,7 @@ void initialiserRectangle(struct Rectangle *rect, int *lignes, int *colonnes);
 
 int main(void) {
 	
-        char *chemin={"EEEE"};
+        char *chemin={"EEEENNN"};
 	
         int i, j;
         int count=0;
@@ -88,24 +88,25 @@ int main(void) {
                 insertCharacter(lignes, colonnes, abscisse, ordonnee, 'e', tab);
                 insertCharacter(lignes, colonnes, abscisse, ++(ordonnee), 'e', tab);
                 
-                
+            //ordonnee=++(ordonnee);    
                  
-            }if(chemin[i + 1]=='N'){
+            }if(chemin[i]=='N'){
                 printf("chemin[i + 1]= %c\n",chemin[i + 1]);
                 printf("derniere position= ");
                 printf("%d,", abscisse);
                 printf("%d\n", ordonnee);
                 insertCharacter(lignes, colonnes, --(abscisse), ordonnee, 'n', tab);
-                abscisse= --(abscisse);
+                //abscisse= --(abscisse);
+                //ordonnee= ordonnee;
                
-            }if(chemin[i + 1]=='S'){
+            }if(chemin[i]=='S'){
                 printf("chemin[i + 1]= %c\n",chemin[i + 1]);
                 printf("derniere position= ");
                 printf("%d,", abscisse);
                 printf("%d\n", ordonnee);
                 insertCharacter(lignes, colonnes, ++(abscisse), ordonnee, 's', tab);
             }
-                (ordonnee)++;
+                ordonnee= (ordonnee)++;
         }
         
         
