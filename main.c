@@ -23,7 +23,7 @@ void initialiserRectangle(struct Rectangle *rect, int *lignes, int *colonnes);
 
 int main(void) {
 	
-        char *chemin={"ENSS"};
+        char *chemin={"EEEE"};
 	
         int i, j;
         int count=0;
@@ -73,27 +73,44 @@ int main(void) {
         printf("Ymax = %d\n", rect.ymax);
         
         
-        int positionX=0;
-        int positionY=0;
-        for(i=0; i< count; i++){
-            if(chemin[i]=='E'){
-                insertCharacter(lignes, colonnes, debut, rect.ymin, 'e', tab);
-                insertCharacter(lignes, colonnes, debut, ((rect.ymin) + 1), 'e', tab);
-                positionX= debut;
-                positionY= rect.ymin+ 1;
+        int abscisse=0;
+        int ordonnee=0;
+        //while((chemin[i]=='E' || chemin i < colonnes ){
+          //  for(i=0; i < colonnes; i++){
                 
+            //}
+        //}
+        abscisse= debut;
+        ordonnee= rect.ymin;
+        for(i=0; i< count; ++i){
+            if(chemin[i]=='E'){
+                
+                insertCharacter(lignes, colonnes, abscisse, ordonnee, 'e', tab);
+                insertCharacter(lignes, colonnes, abscisse, ++(ordonnee), 'e', tab);
+                
+                
+                 
             }if(chemin[i + 1]=='N'){
                 printf("chemin[i + 1]= %c\n",chemin[i + 1]);
                 printf("derniere position= ");
-                printf("%d,", positionX);
-                printf("%d\n", positionX);
-                insertCharacter(lignes, colonnes, --(positionX), positionY, 'n', tab);
+                printf("%d,", abscisse);
+                printf("%d\n", ordonnee);
+                insertCharacter(lignes, colonnes, --(abscisse), ordonnee, 'n', tab);
+                abscisse= --(abscisse);
+               
+            }if(chemin[i + 1]=='S'){
+                printf("chemin[i + 1]= %c\n",chemin[i + 1]);
+                printf("derniere position= ");
+                printf("%d,", abscisse);
+                printf("%d\n", ordonnee);
+                insertCharacter(lignes, colonnes, ++(abscisse), ordonnee, 's', tab);
             }
+                (ordonnee)++;
         }
         
         
-        int abs= 0;
-        int ordonnee= 0;
+        //int abs= 0;
+        //int ordonnee= 0;
         //for(i=0;i< count + 1;i++){
             
             
