@@ -6,7 +6,7 @@ void printTab(int rows, int cols, char tab[rows][cols]);
 void insertCharacter(int rows, int cols, int x, int y, char letter, char tab[rows][cols]);
 void compterLignes(const char *chemin, int *max, int *min);
 void compterColonnes(const char *chemin, int *max, int *min);
-
+int compterLettres(const char *chemin, char lettre);
 int debutChemin(int *maxLignes, int *maxCol);
 
 
@@ -60,7 +60,7 @@ int main(void) {
         
         //printf("Le minimum = %d", min);
         char tab[lignes][colonnes];
-        memset(tab, ' ', sizeof(tab));//fill under bar
+        memset(tab, '_', sizeof(tab));//fill under bar
         printf("taille chemin %d\n", count);
         //compterLignes(chemin, &max, &min);
         //compterColonnes(chemin, &max, &min);
@@ -73,18 +73,35 @@ int main(void) {
         printf("Ymax = %d\n", rect.ymax);
         
         
+        int positionX=0;
+        int positionY=0;
+        for(i=0; i< count; i++){
+            if(chemin[i]=='E'){
+                insertCharacter(lignes, colonnes, debut, rect.ymin, 'e', tab);
+                insertCharacter(lignes, colonnes, debut, ((rect.ymin) + 1), 'e', tab);
+                positionX= debut;
+                positionY= rect.ymin+ 1;
+                
+            }if(chemin[i + 1]=='N'){
+                printf("chemin[i + 1]= %c\n",chemin[i + 1]);
+                printf("derniere position= ");
+                printf("%d,", positionX);
+                printf("%d\n", positionX);
+                insertCharacter(lignes, colonnes, --(positionX), positionY, 'n', tab);
+            }
+        }
         
         
         int abs= 0;
         int ordonnee= 0;
-        for(i=0;i< count + 1;i++){
+        //for(i=0;i< count + 1;i++){
             
             
             
-	insertCharacter(lignes, colonnes, abs, ordonnee, 'x', tab);
-        ++ordonnee;
+	//insertCharacter(lignes, colonnes, abs, ordonnee, 'x', tab);
+        //ordonnee++;
         
-        }
+        //}
 	printTab(lignes, colonnes, tab);
 	return 0;
 }
@@ -101,6 +118,17 @@ void initialiserRectangle(struct Rectangle *rect, int *lignes, int *colonnes){
         
     }
     
+
+int compterLettres(const char *chemin, char lettre){
+    int i;
+    int compte=0;
+    for(i=0;i < (strlen(chemin));i++){
+        if(chemin[i]==lettre){
+            compte++;
+        }
+    }
+    return compte;
+}
 
 
 int debutChemin(int *maxLignes, int *maxCol){
