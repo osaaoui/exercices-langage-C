@@ -23,7 +23,7 @@ void initialiserRectangle(struct Rectangle *rect, int *lignes, int *colonnes);
 
 int main(void) {
 	
-        char *chemin={"EEEENNN"};
+        char *chemin={"EEEENNWWSSSS"};
 	
         int i, j;
         int count=0;
@@ -105,8 +105,17 @@ int main(void) {
                 printf("%d,", abscisse);
                 printf("%d\n", ordonnee);
                 insertCharacter(lignes, colonnes, ++(abscisse), ordonnee, 's', tab);
+            
+            }if(chemin[i]=='W'){
+                //printf("chemin[i + 1]= %c\n",chemin[i + 1]);
+                printf("derniere position= ");
+                printf("%d,", abscisse);
+                printf("%d\n", ordonnee);
+                insertCharacter(lignes, colonnes, abscisse, --(ordonnee), 'w', tab);
             }
                 ordonnee= (ordonnee)++;
+                //abscisse= --(abscisse);
+                printf("l'ordonnee au %d tour = %d\n", i, ordonnee);
         }
         
         
@@ -155,7 +164,10 @@ int debutChemin(int *maxLignes, int *maxCol){
         debut =0;
     }else if(*maxLignes < *maxCol){
         debut= *maxLignes; 
-    }else{
+    }else if(*maxLignes == *maxCol){
+        debut= *maxLignes;
+    }
+    else{
         debut= *maxLignes - *maxCol;
     }
     return debut;
